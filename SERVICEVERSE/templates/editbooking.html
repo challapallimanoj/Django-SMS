@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPDATEBOOKING</title>
+    <link rel="stylesheet" href="https://dl.dropbox.com/s/n4awvsj7l9sqj87/bookingform.css?dl=0">
+</head>
+
+<body>
+    <section>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="box">
+            <div class="square" style="--i:0"></div>
+            <div class="square" style="--i:1"></div>
+            <div class="square" style="--i:2"></div>
+            <div class="square" style="--i:3"></div>
+            <div class="square" style="--i:4"></div>
+            <div class="container">
+                <div class="form">
+                    <h2>Update Booking</h2>
+                    <form action="/edit/{{id}}" method="POST">
+                        {% csrf_token %}
+                        <div class="inputBx">
+                            <input type="text" name="name" value="{{name}}">
+                        </div>
+                        <div class="inputBx">
+                            <input type="phone" name="number" value="{{number}}">
+                        </div>
+                        <div class="inputBx">
+                            <select name="service">
+                                <option value="PAINTING">PAINTING</option>
+                                <option value="CARPENTERING">CARPENTERING</option>
+                                <option value="HOUSE SHIFTING">HOUSE SHIFTING</option>
+                                <option value="FOOD CATERING">FOOD CATERING</option>
+                                <option value="LAUNDRY/DRY WASH">LAUNDRY/DRY WASH</option>
+                                <option value="PLUMBERING">PLUMBERING</option>
+                                <option value="CONSTRUCTION">CONSTRUCTION</option>
+                                <option value="MECHANICS">MECHANICS</option>
+                                <option value="INTERIOR DESIGNING">INTERIOR DESIGNING</option>
+                                <option value="TECHNICIANS">TECHNICIANS</option>
+                                <option value="PRINTING">PRINTING</option>
+                                <option value="UNISEX PARLOR">UNISEX PARLOR</option>
+                                <option value="OTHER">OTHER</option>
+                            </select>
+                        </div>
+                        <div class="inputBx">
+                            <input type="date" name="date" value="{{date}}" required>
+                        </div>
+                        <div class="inputBx">
+                            <input type="submit" value="Submit">
+                            <a href="{% url 'profile' %}"><input type="button" value="GoBack"
+                                    style="background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);"></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

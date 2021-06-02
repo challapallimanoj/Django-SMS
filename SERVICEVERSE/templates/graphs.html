@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.0/dist/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+</head>
+<style>
+    .card {
+        border-radius: 20px;
+        margin-right: 15px;
+        margin-left: 20px;
+    }
+
+    h1 {
+        color: white;
+        font-family: sans-serif;
+    }
+
+    h5 {
+        color: whitesmoke;
+        font-family: sans-serif;
+    }
+
+    body {
+        background-color: #A9C9FF;
+
+    }
+
+    h3 {
+        font-family: sans-serif;
+    }
+
+
+    .card-img-top {
+        border-radius: 20px;
+        height: 35vh;
+    }
+
+    p {
+        color: white;
+        font-family: sans-serif;
+        font-weight: 700;
+    }
+</style>
+
+<body>
+    <br>
+    <center>
+        <h1>SERVICE-VERSE ANALYTICS</h1>
+    </center>
+    <div class="container" style="margin-top: 2%;">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="card bg-primary">
+                    <div class="card-body">
+                        <center>
+                            <h5 class="card-title">Total Owners</h5>
+                        </center>
+                        <br>
+                        <center>
+                            <h1 class="count">{{average.is_superuser__count}}</h1>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="card bg-dark">
+                    <div class="card-body">
+                        <center>
+                            <h5 class="card-title">All Bookings</h5>
+                        </center>
+                        <br>
+                        <center>
+                            <h1 class="count">{{bookings}}</h1>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="card bg-warning">
+                    <div class="card-body">
+                        <center>
+                            <h5 class="card-title">Total Services</h5>
+                        </center>
+                        <br>
+                        <center>
+                            <h1 class="count">{{services}}</h1>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="card bg-danger">
+                    <div class="card-body">
+                        <center>
+                            <h5 class="card-title">Total Users</h5>
+                        </center>
+                        <br>
+                        <center>
+                            <h1 class="count">{{counter}}</h1>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="card bg-success">
+                    <div class="card-body">
+                        <center>
+                            <h5 class="card-title">Total Active</h5>
+                        </center>
+                        <br>
+                        <center>
+                            <h1 class="count">{{active}}</h1>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="card bg-info">
+                    <div class="card-body">
+                        <center>
+                            <h5 class="card-title">Total InActive</h5>
+                        </center>
+                        <br>
+                        <center>
+                            <h1 class="count">{{inactive}}</h1>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <h3>Services State-Wide Bookings Overview</h3>
+        <canvas id="myChart" width="500" height="150vh"></canvas>
+        <script>
+            var df = {{ df }};
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Andhra Pradesh', 'Uttar Pradesh', 'Haryana', 'ArunachalPradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Jammu and Kashmir', 'Jharkhand', 'West Bengal', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Orissa', 'Himachal Pradesh', 'Punjab', 'Rajasthan', 'Telangana', 'Chandigarh', 'Andaman and Nicobar Islands', 'Dadra and Nagar Haveli', 'Daman and Diu', 'National Capital Territory of Delhi', 'Lakshadweep', 'Puducherry'],
+                    datasets: [{
+                        label: 'Services Bookings in Sates Visualization',
+                        data: df,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 20
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+        </script>
+    </div>
+    <br>
+    <div class="container">
+        <h3>Services Bookings Overview</h3>
+        <canvas id="mybookings" width="500" height="150vh"></canvas>
+        <script>
+            var df = {{ df1 }};
+            var ctx = document.getElementById('mybookings').getContext('2d');
+            var mybookings = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['PAINTING', 'CARPENTERING', 'HOUSE SHIFTING', 'FOOD CATERING', 'LAUNDRY/DRY WASH', 'PLUMBERING', 'CONSTRUCTION', 'MECHANICS', 'INTERIOR DESIGNING', 'TECHNICIANS', 'PRINTING', 'UNISEX PARLOR', 'OTHER'],
+                    datasets: [{
+                        label: 'Services Bookings',
+                        data: df,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+        </script>
+    </div>
+    <br>
+    <div class="container">
+        <h3>Services Profit (Minimum Charges)</h3>
+        <canvas id="myprofit" width="200" height="50vh"></canvas>
+        <script>
+            var df = {{ df2 }};
+            var ctx = document.getElementById('myprofit').getContext('2d');
+            var myprofit = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['PAINTING', 'CARPENTERING', 'HOUSE SHIFTING', 'FOOD CATERING', 'LAUNDRY/DRY WASH', 'PLUMBERING', 'CONSTRUCTION', 'MECHANICS', 'INTERIOR DESIGNING', 'TECHNICIANS', 'PRINTING', 'UNISEX PARLOR', 'OTHER'],
+                    datasets: [{
+                        label: 'Services Bookings',
+                        data: df,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+        </script>
+    </div>
+    <br>
+    <div class="container">
+        <h3>No of Staff</h3>
+        <canvas id="myemp" width="200" height="50vh"></canvas>
+        <script>
+            var df = {{ emp }};
+            var ctx = document.getElementById('myemp').getContext('2d');
+            var myemp = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['PAINTING', 'CARPENTERING', 'HOUSE SHIFTING', 'FOOD CATERING', 'LAUNDRY/DRY WASH', 'PLUMBERING', 'CONSTRUCTION', 'MECHANICS', 'INTERIOR DESIGNING', 'TECHNICIANS', 'PRINTING', 'UNISEX PARLOR'],
+                    datasets: [{
+                        label: 'Services Staff',
+                        data: df,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+        </script>
+    </div>
+    <br>
+    <div class="container">
+        <h3>Profit</h3>
+        <div class="card mb-3 bg-success">
+            <img src="https://d1qq9lwf5ow8iz.cloudfront.net/live-images-1/ImageDetail_5038462a-22f5-4eb5-a99d-e5f0e4f03162_Medium"
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Profit</h5>
+                <center>
+                    <h1> {{average_profit.minimum_charges__avg}} %</h1>
+                </center>
+                <p class="card-text">This is the profit attained by minimum charges calucalted on each service.
+                </p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <br>
+    <div class="container">
+        <h3>Daily Service Goal to reach profit</h3>
+        <div class="card mb-3 bg-dark">
+            <img src="https://miro.medium.com/max/5000/1*-NnQyreJe1iiGyGrNvjdqw.jpeg" class="card-img-top" alt="..."
+                style="height:35vh">
+            <div class="card-body">
+                <h5>Services Goal</h5>
+                <center>
+                    <h1 class="card-title">{{lb}}&nbsp;Services</h1>
+                </center>
+                <br>
+                <p class="card-text">The above count of services to be booked, i.e Daily Goal to attain the profit to
+                    make your day </p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $('.count').each(function () {
+        $(this).prop('Counter', 0).animate({
+            Counter: $(this).text()
+        }, {
+            duration: 4000,
+            easing: 'swing',
+            step: function (now) {
+                $(this).text(Math.ceil(now));
+            }
+        });
+    });
+</script>
+
+</html>

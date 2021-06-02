@@ -1,0 +1,211 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://dl.dropbox.com/s/rilegrst8py0y3f/service.css?dl=0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>SERVICES</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/sv/favicon.png' %}" />
+</head>
+<style>
+    .float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 60px;
+        right: 40px;
+        background-color: #0C9;
+        color: #FFF;
+        border-radius: 50px;
+        text-align: center;
+        box-shadow: 2px 2px 3px #999;
+    }
+
+    .my-float {
+        margin-top: 22px;
+    }
+
+    .service-img {
+        margin-left: 15%;
+    }
+
+    a {
+        text-decoration: none;
+        color: aliceblue;
+    }
+
+    a:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .modal-content {
+        background-color: #b8c6db;
+        background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%);
+    }
+
+    .btn-grad1 {
+        background-image: linear-gradient(to right, #00c6ff 0%, #0072ff 51%, #00c6ff 100%)
+    }
+
+    .btn-grad1 {
+        padding: 8px 15px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+    }
+
+    .btn-grad1:hover {
+        background-position: right center;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .btn-grad {
+        background-image: linear-gradient(to right, #DA22FF 0%, #9733EE 51%, #DA22FF 100%)
+    }
+
+    .btn-grad {
+        padding: 8px 15px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+    }
+
+    .btn-grad:hover {
+        background-position: right center;
+        /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #8EC5FC;
+        background-image: linear-gradient(0deg, #8EC5FC 0%, #E0C3FC 100%);
+        color: blueviolet;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div class="jumbotron">
+        <div class="row">
+            <div class="header col">
+                <a href="/"> <button class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+                        </svg>&nbsp;GO BACK</button></a>
+            </div>
+            <div class="col">
+                {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <hr>
+        {% for ser in sers %}
+        {% if forloop.counter|divisibleby:2 %}
+        <div class="row">
+            <div class="col">
+                <img src="{{ser.img.url}}" class="service-img" alt="">
+            </div>
+            <div class="col text-left">
+                <h4 class="display-4"><strong>{{ser.name}}</strong></h4>
+                <p>{{ser.desc}}</p>
+                <h5>{{ser.minimum_charges}} Minimum Charges</h5>
+                <a href="{{ser.link}}"><button class="btn-grad" style="margin-top:5%;">GET
+                        SERVICE&nbsp;&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" class="bi bi-wrench" viewBox="0 0 16 16">
+                            <path
+                                d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019l.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z" />
+                        </svg></button></a>
+                <a href="enquiry"><button class="btn-grad"
+                        style="margin-left: 5%;margin-top:5%;">ENQUIRY&nbsp;&nbsp;<svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                        </svg></button></a>
+            </div>
+
+        </div>
+        <br>
+        <hr>
+        {% else %}
+        <div class="row">
+            <div class="col text-left">
+                <h4 class="display-4"><strong>{{ser.name}}</strong></h4>
+                <p>{{ser.desc}}</p>
+                <h5>{{ser.minimum_charges}} Minimum Charges</h5>
+                <a href="{{ser.link}}"><button class="btn-grad1" style="margin-right: 5%;margin-top:5%;">GET
+                        SERVICE&nbsp;&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" class="bi bi-wrench" viewBox="0 0 16 16">
+                            <path
+                                d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019l.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z" />
+                        </svg></button></a>
+                <a href="enquiry"><button class="btn-grad1" style="margin-top:5%;">ENQUIRY&nbsp;&nbsp;<svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                        </svg></button></a>
+            </div>
+            <div class="col">
+                <img src="{{ser.img.url}}" class="service-img" alt="">
+            </div>
+        </div>
+        <br>
+        <hr>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'botpage' %}" class="float">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-lightbulb-fill my-float" viewBox="0 0 16 16">
+            <path
+                d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5z" />
+        </svg></i>
+    </a>
+    <!-- JS FILES-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+        crossorigin="anonymous"></script>
+    <div class="footer">
+        <p style="margin-top: 10px;">SERVICE_VERSE&#169;&nbsp; <span><a href="{% url 'graph_rate'  %}"
+                    style="color: brown;">Admin</a></span>
+        </p>
+    </div>
+</body>
+
+</html>

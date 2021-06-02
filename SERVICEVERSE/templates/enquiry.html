@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SERVICE-VERSE|ENQUIRY</title>
+    <link rel="stylesheet" href="https://dl.dropbox.com/s/yidfjsxnts4ava7/table.css?dl=0">
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/sv/favicon.png' %}" />
+</head>
+<style>
+    .btn-grad {
+        background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA 51%, #1FA2FF 100%)
+    }
+
+    .btn-grad {
+        margin: 10px;
+        padding: 15px 45px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        display: block;
+    }
+
+    .btn-grad:hover {
+        background-position: right center;
+        /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+    }
+
+
+    .btn-grad1 {
+        background-image: linear-gradient(to right, #ffb347 0%, #ffcc33 51%, #ffb347 100%)
+    }
+
+    .btn-grad1 {
+        margin: 10px;
+        padding: 15px 45px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        display: block;
+    }
+
+    .btn-grad1:hover {
+        background-position: right center;
+        /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    body {
+        background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+    }
+
+    h1 {
+        color: darkgreen;
+        font-family: sans-serif;
+    }
+</style>
+
+<body>
+    <center>
+        <h1>SERVICE-VERSE ENQUIRY </h1>
+    </center>
+    <div class="rainbow-table-container" style="margin-left: 25%;margin-top:5%">
+        <table>
+            <tbody class="">
+                <tr class="r-rtr rtr">
+                    <th class="cell">S.N</th>
+                    <th class="cell">BRANCH</th>
+                    <th class="cell">STATE</th>
+                    <th class="cell">PHONE</th>
+                    <th class="cell">SUPERVISOR</th>
+                    <th class="cell">EMAIL</th>
+                </tr>
+                {% for it in item %}
+                {% if forloop.counter|divisibleby:2 %}
+                <tr class="r-wtr wtr">
+                    <th class="cell">{{it.id}}</th>
+                    <td class="cell">{{it.branch}}</td>
+                    <td class="cell">{{it.state}}</td>
+                    <td class="cell">{{it.phone}}</td>
+                    <td class="cell">{{it.supervisor}}</td>
+                    <td class="cell"><a href="mailto:serviceverse@gmail.com"><button class="btn-grad">Email</button></a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr class="r-itr itr">
+                    <th class="cell">{{it.id}}</th>
+                    <td class="cell">{{it.branch}}</td>
+                    <td class="cell">{{it.state}}</td>
+                    <td class="cell">{{it.phone}}</td>
+                    <td class="cell">{{it.supervisor}}</td>
+                    <td class="cell"><a href="mailto:serviceverse@gmail.com"><button
+                                class="btn-grad1">Email</button></a></td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>

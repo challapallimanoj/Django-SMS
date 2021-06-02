@@ -1,0 +1,8 @@
+.service-img{
+    height: 35vh;
+    width: 60%;
+    border-radius: 20px;
+}
+.jumbotron{
+    background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 100%);
+}

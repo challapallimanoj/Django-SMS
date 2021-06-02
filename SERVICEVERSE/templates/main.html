@@ -1,0 +1,93 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/sv/favicon.png' %}" />
+    <title>HOME</title>
+</head>
+<style>
+    .alert {
+        margin-left: 82%;
+        margin-top: 13%;
+    }
+
+    .user {
+        margin-left: 30px;
+    }
+
+    .user strong {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-transform: uppercase;
+        font-size: 20px;
+        color: lightslategrey;
+    }
+
+    .social-links:hover .fa-linkedin {
+        color: #3b5998;
+    }
+
+    nav ul li:hover .fa-lock {
+        color: green;
+    }
+
+    .btn:hover .fa-lock {
+        color: greenyellow;
+    }
+
+    nav ul li:hover .fa-power-off {
+        color: rgb(245, 4, 4);
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <img src="{% static 'img/SV/logo_transparent.png' %}" alt="" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="">HOME<i class="fa fa-home" aria-hidden="true"></i></a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="services">SERVICES&nbsp;&nbsp;<i class="fa fa-wrench" aria-hidden="true"></i></a></li>
+                    <li><a href="profile">BOOKINGS <i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                    <li><a href="accounts/logout">LOGOUT&nbsp;<i class="fa fa-power-off" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="user">HELLO,&nbsp;&nbsp;<strong>{{user.username}}</strong></li>
+                    {% else %}
+                    <li><a href="/">SERVICES&nbsp;<i class="fa fa-lock" aria-hidden="true"></i></a></li>
+                    <li><a href="/">BOOKINGS&nbsp;<i class="fa fa-lock" aria-hidden="true"></i></a></li>
+                    <li><a href="accounts/register">SIGNUP&nbsp;<i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        <div class="content">
+            {% if user.is_authenticated %}
+            <a href="services" class="btn">2021 SERVICES</a>
+            <h1>You should always <br> feel comfortable</h1>
+            <p>The Best Services at your door steps.</p>
+            <h3> <strong>by</strong> Service-Verse</h3>
+            {% else %}
+            <a href="/" class="btn">2021 SERVICES &nbsp;<i class="fa fa-lock" aria-hidden="true"></i></a>
+            <h1>You should always <br> feel comfortable</h1>
+            <p>The Best Services at your door steps.</p>
+            <h3> <strong>by</strong> Service-Verse</h3>
+            {% endif %}
+        </div>
+        <img src="{% static 'img/model.png' %}" alt="" class="feature-img">
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/service-verse-a46513204/" target="_blank">Lnkedin <i
+                    class="fab fa-linkedin" aria-hidden="true"></i></a>
+            <a href="https://www.instagram.com/serviceverse/" target="_blank">Instagram <i class="fab fa-instagram"
+                    aria-hidden="true"></i></a>
+            <a href="https://twitter.com/ServiceVerse" target="_blank">Twitter <i class="fab fa-twitter"
+                    aria-hidden="true"></i></a>
+        </div>
+</body>
+
+</html>

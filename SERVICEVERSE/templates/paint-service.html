@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAINTING</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/sv/favicon.png' %}" />
+    <link rel="stylesheet" href="https://dl.dropbox.com/s/28xfp56cci9pkgf/servicescard.css?dl=0">
+</head>
+<style>
+    body {
+        background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+    }
+
+    .btn-grad {
+        background-image: linear-gradient(to right, #603813 0%, #b29f94 51%, #603813 100%)
+    }
+
+
+    .btn-grad {
+        background-image: linear-gradient(to right, #83a4d4 0%, #b6fbff 51%, #83a4d4 100%)
+    }
+
+    .btn-grad {
+        margin: 10px;
+        padding: 15px 45px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        display: block;
+        outline: none;
+        border: 0;
+    }
+
+    .btn-grad:hover {
+        background-position: right center;
+        color: #fff;
+        text-decoration: none;
+        outline: none;
+        border: 0;
+    }
+
+
+    a {
+        text-decoration: none;
+    }
+</style>
+
+<body>
+    <div class="container">
+        {% for it in item%}
+        <div class="box">
+            <div class="imgBx">
+                <img class="manoj" src="{{it.img.url}}" alt="">
+            </div>
+            <div class="contentBx">
+                <h2>{{it.category}}</h2>
+                <ul>
+                    <li>Type :{{it.type}}</li>
+                    <li>Suits for :{{it.suits}}</li>
+                    <li>Brand :{{it.brand}}</li>
+                    <li>Price Rate : Rs.{{it.price}}/sq ft</li>
+                    <li>Rating : {{it.rating}}/5</li>
+                    <li><a href="details" class="btn-grad">Booknow</a></li>
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <script type="text/javascript" src="https://dl.dropbox.com/s/jfybedz46x2i683/vanilla-tilt.js?dl=0"></script>
+    <script type="text/javascript">
+        VanillaTilt.init(document.querySelectorAll(".box"), {
+            max: 25,
+            speed: 400
+        });
+    </script>
+</body>
+
+</html>
