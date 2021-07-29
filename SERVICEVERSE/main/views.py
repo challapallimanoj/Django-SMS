@@ -13,7 +13,7 @@ import wikipedia
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 import pandas as pd
-
+from .forms import*
 
 # Create your views here.
 
@@ -131,7 +131,8 @@ def services(request):
 
 @login_required
 def details(request):
-    return render(request, 'booking.html')
+    form=BookingForm
+    return render(request, 'booking.html',{'form':form})
 
 # Bookings function
 
@@ -158,23 +159,7 @@ def booking(request):
         selected_date = date
         counting = Bookings.objects.filter(date=selected_date).values()
         df = pd.DataFrame(counting)
-        count = len(df[df['service'] == selected_service])
-        counting1 = Services.objects.all().values()
-        df1 = pd.DataFrame(counting1)
-        count1 = df1.loc[df1.name == selected_service,
-                         'employee_count'].to_string(index=False)
-        count2 = int(count1)
-        print(selected_service)
-        print(selected_date)
-        print(count)
-        print(count2)
-        # checking availbality (incase of available)
-        if count > count2:
-            messages.info(
-                request, 'Sorry To Say Workers were Busy for Selected Service & Date ! You can Book on Another Date')
-            return redirect("services")
-        # in case of available
-        else:
+        if(df.empty):
             book.save()
             messages.info(
                 request, mark_safe('Successfully booked a Service Check Your <a href="profile" style="color:blue;">Bookings</a>'))
@@ -188,13 +173,28 @@ def booking(request):
             message.content_subtype = 'html'
             message.send()
             return redirect("services")
+        else:
+            count = len(df[df['service'] == selected_service])
+            print(count)
+            counting1 = Services.objects.all().values()
+            df1 = pd.DataFrame(counting1)
+            count1 = df1.loc[df1.name == selected_service,
+                             'employee_count'].to_string(index=False)
+            count2 = int(count1)
+            print(selected_service)
+            print(selected_date)
+            print(count)
+            print(count2)
+            # checking availbality (incase of available)
+            if count > count2:
+                messages.info(
+                request, 'Sorry To Say Workers were Busy for Selected Service & Date ! You can Book on Another Date')
+                return redirect("services")
     else:
-        return redirect("services")
+        return redirect("details")
 
 
 # bot page
-
-
 @login_required
 def botpage(request):
     return render(request, 'bot.html')
